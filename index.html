@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Process Analytics Hub — Transformación MeLi</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f2f5; min-height: 100vh; }
+
+  .header {
+    background: #1a1f36;
+    color: #fff;
+    padding: 28px 40px 32px;
+    text-align: center;
+  }
+  .header .logo { font-size: 32px; margin-bottom: 8px; }
+  .header h1 { font-size: 26px; font-weight: 700; letter-spacing: .3px; }
+  .header .subtitle { font-size: 14px; color: #a0aec0; margin-top: 6px; }
+  .header .badge-row { display: flex; gap: 10px; justify-content: center; margin-top: 12px; }
+  .badge { padding: 4px 14px; border-radius: 12px; font-size: 11px; font-weight: 700; }
+  .badge.purple { background: #635bff; color: #fff; }
+  .badge.green { background: #38a169; color: #fff; }
+  .badge.orange { background: #ed8936; color: #fff; }
+
+  .cards-section {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 24px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #a0aec0;
+    margin-bottom: 16px;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .app-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 28px 30px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.07);
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform .2s, box-shadow .2s;
+    border-top: 5px solid #635bff;
+    position: relative;
+    overflow: hidden;
+  }
+  .app-card.orange { border-top-color: #ed8936; }
+  .app-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,.12); }
+  .app-card .icon { font-size: 36px; margin-bottom: 12px; }
+  .app-card h2 { font-size: 18px; font-weight: 700; color: #1a1f36; margin-bottom: 8px; }
+  .app-card .desc { font-size: 13px; color: #718096; line-height: 1.6; margin-bottom: 18px; }
+  .app-card .meta-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .meta-chip {
+    background: #f7fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 11px;
+    color: #718096;
+    font-weight: 600;
+  }
+  .app-card .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #635bff;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 20px;
+    transition: background .15s;
+  }
+  .app-card.orange .cta { background: #ed8936; }
+  .app-card:hover .cta { filter: brightness(1.1); }
+
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .stat-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 18px 20px;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  }
+  .stat-card .val { font-size: 28px; font-weight: 700; color: #635bff; }
+  .stat-card .lbl { font-size: 11px; color: #a0aec0; margin-top: 4px; }
+
+  .info-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  .info-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px 24px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  }
+  .info-card h3 { font-size: 13px; font-weight: 700; color: #2d3748; margin-bottom: 12px; }
+  .info-card ul { list-style: none; }
+  .info-card ul li {
+    padding: 7px 0;
+    border-bottom: 1px solid #f0f2f5;
+    font-size: 12px;
+    color: #4a5568;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .info-card ul li:last-child { border: none; }
+  .info-card ul li .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .dot.purple { background: #635bff; }
+  .dot.orange { background: #ed8936; }
+  .dot.green { background: #38a169; }
+
+  .footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 11px;
+    color: #a0aec0;
+    border-top: 1px solid #e2e8f0;
+    background: #fff;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<style>
+#login-overlay{position:fixed;inset:0;background:#1a1f36;z-index:99999;display:flex;align-items:center;justify-content:center}
+.login-box{background:#fff;border-radius:16px;padding:40px 48px;text-align:center;width:360px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.login-box .logo{font-size:40px;margin-bottom:12px}
+.login-box h2{font-size:20px;font-weight:700;color:#1a1f36;margin-bottom:6px}
+.login-box p{font-size:13px;color:#718096;margin-bottom:24px}
+.login-box input{width:100%;padding:12px 16px;border:2px solid #e2e8f0;border-radius:8px;font-size:15px;text-align:center;letter-spacing:4px;outline:none;margin-bottom:14px}
+.login-box input:focus{border-color:#635bff}
+.login-box button{width:100%;padding:12px;background:#635bff;color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer}
+.login-box button:hover{background:#5248d8}
+.login-box .error{color:#e53e3e;font-size:12px;margin-top:8px;display:none}
+.login-box .hint{font-size:11px;color:#a0aec0;margin-top:12px}
+</style>
+<div id="login-overlay">
+  <div class="login-box">
+    <div class="logo">⚡</div>
+    <h2>Process Analytics Hub</h2>
+    <p>Ingresá la clave de acceso del equipo</p>
+    <input type="password" id="pwd-input" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkPwd()">
+    <button onclick="checkPwd()">Ingresar</button>
+    <div class="error" id="pwd-error">Clave incorrecta. Pedila a Gabriela 😊</div>
+    <div class="hint">Transformación · MercadoLibre</div>
+  </div>
+</div>
+<script>
+(function(){
+  // Check if already authenticated this session
+  const KEY = 'pa_auth_v1';
+  const HASH = 'Celonguis';  // Will be replaced with actual password
+  if(sessionStorage.getItem(KEY) === '1') {
+    document.getElementById('login-overlay').style.display='none';
+  }
+})();
+function checkPwd(){
+  const val = document.getElementById('pwd-input').value;
+  const PASS = 'Celonguis';  // team password placeholder
+  if(val === PASS){
+    sessionStorage.setItem('pa_auth_v1','1');
+    document.getElementById('login-overlay').style.display='none';
+  } else {
+    document.getElementById('pwd-error').style.display='block';
+    document.getElementById('pwd-input').value='';
+    document.getElementById('pwd-input').focus();
+  }
+}
+</script>
+
+
+<div class="header">
+  <div class="logo">⚡</div>
+  <h1>Process Analytics Hub</h1>
+  <div class="subtitle">Transformación · MercadoLibre · Gestión del equipo y monitoreo de señales</div>
+  <div class="badge-row">
+    <span class="badge purple">Process Mining</span>
+    <span class="badge green">Jira RPRA</span>
+    <span class="badge orange">Alertas Celonis</span>
+  </div>
+</div>
+
+<div class="cards-section">
+
+  <!-- Stats bar -->
+  <div class="stats-bar">
+    <div class="stat-card">
+      <div class="val">300</div>
+      <div class="lbl">Issues RPRA (12 meses)</div>
+    </div>
+    <div class="stat-card">
+      <div class="val" style="color:#ed8936">286</div>
+      <div class="lbl">OCs Duplicadas (últ. 4 días)</div>
+    </div>
+    <div class="stat-card">
+      <div class="val" style="color:#e53e3e">92</div>
+      <div class="lbl">Top Offenders Notificados</div>
+    </div>
+    <div class="stat-card">
+      <div class="val" style="color:#38a169">1</div>
+      <div class="lbl">Contrato ≥80% Consumido</div>
+    </div>
+  </div>
+
+  <!-- Main cards -->
+  <div class="section-label">📂 Aplicaciones del Equipo</div>
+  <div class="cards-grid">
+
+    <a href="process_analytics_dashboard.html" class="app-card">
+      <div class="icon">📊</div>
+      <h2>Dashboard de Requerimientos RPRA</h2>
+      <div class="desc">
+        Gestión integral de issues del proyecto Jira RPRA. Visualizá iniciativas por proceso Celonis,
+        aging, SLA, completitud de campos y más. Tabs por proceso, filtros multi-select con inclusión/exclusión.
+      </div>
+      <div class="meta-row">
+        <span class="meta-chip">📋 300 issues</span>
+        <span class="meta-chip">⏱ Mar 2025 – Mar 2026</span>
+        <span class="meta-chip">🔄 Actualización diaria</span>
+        <span class="meta-chip">9 procesos Celonis</span>
+      </div>
+      <div class="cta">Abrir Dashboard →</div>
+    </a>
+
+    <a href="dashboard_alertas.html" class="app-card orange">
+      <div class="icon">🚨</div>
+      <h2>Dashboard de Alertas Celonis</h2>
+      <div class="desc">
+        Monitoreo de alertas automáticas de Process Mining. Visualizá OCs potencialmente duplicadas,
+        uso de contratos al límite y top offenders notificados. Datos de emails de processmining@mercadolibre.com.
+      </div>
+      <div class="meta-row">
+        <span class="meta-chip">🔴 OC Duplicadas</span>
+        <span class="meta-chip">📋 Uso de Contratos</span>
+        <span class="meta-chip">⚠️ Top Offenders</span>
+        <span class="meta-chip">449 filas de detalle</span>
+      </div>
+      <div class="cta">Abrir Alertas →</div>
+    </a>
+
+  </div>
+
+  <!-- Info row -->
+  <div class="info-row">
+    <div class="info-card">
+      <h3>📌 Resumen de Alertas Recientes</h3>
+      <ul>
+        <li><span class="dot red" style="background:#e53e3e"></span>27/03: Control OC Duplicadas — 47 OCs, 78 ítems, USD 460K</li>
+        <li><span class="dot" style="background:#e53e3e"></span>26/03: Control OC Duplicadas — 82 OCs, 113 ítems, USD 27.3M</li>
+        <li><span class="dot" style="background:#e53e3e"></span>25/03: Control OC Duplicadas — 53 OCs, 80 ítems, USD 163K</li>
+        <li><span class="dot" style="background:#e53e3e"></span>24/03: Control OC Duplicadas — 104 OCs, 336 ítems, USD 1.8M</li>
+        <li><span class="dot orange"></span>27/03: Uso de Contrato Consumido — 1 contrato al 100%</li>
+        <li><span class="dot" style="background:#ed8936"></span>23/03: Top Offenders — 92 notificaciones enviadas</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>🔗 Links Rápidos</h3>
+      <ul>
+        <li><span class="dot purple"></span><a href="https://mercadolibre-administration.atlassian.net/servicedesk/customer/portal/12" target="_blank" style="color:#635bff;text-decoration:none">Portal Jira RPRA (Service Desk)</a></li>
+        <li><span class="dot orange"></span><a href="https://mercadolibre.us-1.celonis.cloud/package-manager/ui/views/ui/spaces/9685dddd-7bc6-47b4-b1dc-8ebebb0425ad/packages/d27cde28-5544-4a28-bebc-48809d7fa872/nodes/80aa882e-1183-4cac-a375-790b566e650a" target="_blank" style="color:#ed8936;text-decoration:none">Celonis — Action View OC Duplicadas</a></li>
+        <li><span class="dot orange"></span><a href="https://mercadolibre.us-1.celonis.cloud/package-manager/ui/views/ui/spaces/9685dddd-7bc6-47b4-b1dc-8ebebb0425ad/nodes/9f4fd9d8-41ff-418d-9474-e9af57ee0a07" target="_blank" style="color:#ed8936;text-decoration:none">Celonis — Action View Uso de Contratos</a></li>
+        <li><span class="dot green"></span><a href="https://docs.google.com/spreadsheets/d/1Err7kYYKCCHO67zmuV0H9DAlPuZG_7-XYtYPLWCtJYc/edit#gid=0" target="_blank" style="color:#38a169;text-decoration:none">Google Sheet — Respuestas Top Offenders</a></li>
+        <li><span class="dot purple"></span><a href="mailto:processmining@mercadolibre.com" style="color:#635bff;text-decoration:none">processmining@mercadolibre.com</a></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Process Analytics · Transformación MercadoLibre · Actualizado: 27/03/2026
+</div>
+
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Way of Work — Process Mining · FPS MercadoLibre</title>
+<title>Way of Work — Process Mining · Process Analytics · MercadoLibre</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
 <style>
 /* ── MeLi Design Tokens ── */
@@ -174,7 +174,7 @@ footer{text-align:center;padding:24px;font-size:11px;color:#aaa;background:var(-
     <input type="password" id="pwd-input" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkPwd()">
     <button onclick="checkPwd()">Ingresar</button>
     <div class="error" id="pwd-error">Clave incorrecta. Pedila a Gabriela 😊</div>
-    <div class="hint">Transformación · MercadoLibre</div>
+    <div class="hint">Process Analytics · MercadoLibre</div>
   </div>
 </div>
 <script>
@@ -186,14 +186,14 @@ function checkPwd(){const v=document.getElementById('pwd-input').value;if(v==='C
 <div class="topbar">
   <a href="index.html">← Volver al Hub</a>
   <span class="title">⚡ Process Mining · Way of Work</span>
-  <span style="font-size:11px;color:rgba(255,255,255,.4)">FPS · MercadoLibre · 2026</span>
+  <span style="font-size:11px;color:rgba(255,255,255,.4)">Process Analytics · MercadoLibre · 2026</span>
 </div>
 
 <!-- HERO -->
 <div class="hero">
-  <div class="meli-tag">FPS · Transformación · MercadoLibre</div>
+  <div class="meli-tag">Process Analytics · MercadoLibre</div>
   <h1>Process <span>Mining</span><br>Way of Work</h1>
-  <p class="sub">Impulsamos la minería de procesos en MercadoLibre para detectar eficiencias, mejorar operaciones y generar valor con Celonis — desde FPS para toda la organización.</p>
+  <p class="sub">Impulsamos la minería de procesos en MercadoLibre para detectar eficiencias, mejorar operaciones y generar valor con Celonis — para toda la organización.</p>
   <div class="hero-stats">
     <div class="hero-stat"><span class="val">10+</span><span class="lbl">Procesos conectados</span></div>
     <div class="hero-stat"><span class="val">5</span><span class="lbl">Objetivos estratégicos</span></div>
@@ -222,7 +222,7 @@ function checkPwd(){const v=document.getElementById('pwd-input').value;if(v==='C
     <div class="feat-card">
       <h3>🎯 ¿Para qué lo usamos en MELI?</h3>
       <ul class="feat-list">
-        <li>Impulsor de mejora continua desde FPS para toda la organización</li>
+        <li>Impulsor de mejora continua dentro de MercadoLibre</li>
         <li>Detectar eficiencias en las operaciones y descubrir oportunidades de mejora</li>
         <li>Facilitar la escalabilidad, sistematización y homogeneización de procesos</li>
         <li>Optimizar costos, reducir tiempos y eliminar errores</li>
@@ -269,7 +269,7 @@ function checkPwd(){const v=document.getElementById('pwd-input').value;if(v==='C
       <tr><td><strong>ITSM</strong></td><td>IT Service Management</td><td><span class="proc-badge badge-active">🟢 Activo</span></td><td>KPIs, Compliance, Automations, Alertas</td></tr>
       <tr><td><strong>RTR</strong></td><td>Record to Report</td><td><span class="proc-badge badge-active">🟢 Activo</span></td><td>Extractos, Expense Management</td></tr>
       <tr><td><strong>People</strong></td><td>HTR (Hire to Retire)</td><td><span class="proc-badge badge-active">🟢 Activo</span></td><td>Automatizaciones, Reporting</td></tr>
-      <tr><td><strong>OTC</strong></td><td>Order to Cash</td><td><span class="proc-badge badge-progress">🟡 En curso</span></td><td>Variantes AS IS, Análisis de ciclo</td></tr>
+      <tr><td><strong>OTC</strong></td><td>Order to Cash (1P)</td><td><span class="proc-badge badge-active">🟢 Activo</span></td><td>Dashboards, variantes AS IS, análisis de ciclo</td></tr>
       <tr><td><strong>Shipping</strong></td><td>Mercado Envíos</td><td><span class="proc-badge badge-progress">🟡 En curso</span></td><td>POV activo, variantes</td></tr>
       <tr><td><strong>Order Mgmt</strong></td><td>Sales / O2C</td><td><span class="proc-badge badge-pov">🔵 POV</span></td><td>Análisis inicial</td></tr>
       <tr><td><strong>Finance</strong></td><td>FI / Costos</td><td><span class="proc-badge badge-progress">🟡 En curso</span></td><td>Migración RUN FI costos</td></tr>
@@ -369,25 +369,8 @@ function checkPwd(){const v=document.getElementById('pwd-input').value;if(v==='C
     </div>
   </div>
 
-  <div class="charts-row three" style="margin-top:36px">
-    <div class="chart-card">
-      <h3>🔬 Metodología POVs</h3>
-      <div class="chart-sub">Prueba de Valor — 3 sesiones</div>
-      <canvas id="chartPov"></canvas>
-    </div>
-    <div class="chart-card">
-      <h3>⚡ Metodología Challenges</h3>
-      <div class="chart-sub">10 pasos de implementación</div>
-      <canvas id="chartChallenge"></canvas>
-    </div>
-    <div class="chart-card">
-      <h3>👥 Roles del Proyecto</h3>
-      <div class="chart-sub">Perfiles necesarios</div>
-      <canvas id="chartRoles"></canvas>
-    </div>
-  </div>
 
-  <h3 style="font-size:15px;font-weight:800;margin:36px 0 18px;color:var(--navy)">👥 Perfiles del Equipo</h3>
+    <h3 style="font-size:15px;font-weight:800;margin:36px 0 18px;color:var(--navy)">👥 Perfiles del Equipo</h3>
   <div class="roles-grid">
     <div class="role-card">
       <h4>🎯 Process Mining Champion</h4>
@@ -422,7 +405,7 @@ function checkPwd(){const v=document.getElementById('pwd-input').value;if(v==='C
 <div class="section">
   <span class="section-tag">📈 Gestión</span>
   <h2 class="section-title">Informe de Gestión de Requerimientos</h2>
-  <p class="section-sub">Seguimiento del backlog, issues en curso, tiempos, por proceso y por estado. Fuentes: Jira RPRA, Celonis, Looker.</p>
+  <p class="section-sub">Seguimiento del backlog, issues en curso, tiempos, por proceso y por estado.</p>
 
   <div class="mgmt-grid">
     <div class="feat-card">
@@ -463,7 +446,7 @@ function checkPwd(){const v=document.getElementById('pwd-input').value;if(v==='C
 </div>
 
 <footer>
-  Process Analytics · FPS Transformación · MercadoLibre · Way of Work 2026
+  Process Analytics · MercadoLibre · Way of Work 2026
 </footer>
 
 <script>
@@ -520,72 +503,8 @@ new Chart(document.getElementById('chartTipos'), {
   }
 });
 
-// ── Radar: POV ──
-new Chart(document.getElementById('chartPov'), {
-  type: 'radar',
-  data: {
-    labels: ['Pre-planning','Datos','Intro PM','Caso de Uso','Validación','Cierre'],
-    datasets: [{
-      label: 'Cobertura POV',
-      data: [90,80,100,85,75,95],
-      backgroundColor: 'rgba(255,230,0,.2)',
-      borderColor: C.yellow,
-      borderWidth: 2.5,
-      pointBackgroundColor: C.navy,
-      pointRadius: 4
-    }]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: true,
-    scales:{r:{ticks:{display:false}, grid:{color:'#e8e8e8'}, pointLabels:{font:{size:9}}}},
-    plugins:{legend:{display:false}}
-  }
-});
 
-// ── Horizontal bar: Challenge steps ──
-new Chart(document.getElementById('chartChallenge'), {
-  type: 'bar',
-  data: {
-    labels: ['01 Relevamiento','02 Formalización','03 Esp. Funcional','04 Métrica Objetivo','05 Viabilidad','06 Validación','07 Testing','08 Cap. de Valor','09 Go Live','10 Resultados'],
-    datasets: [{
-      data: [1,1,1,1,1,1,1,1,1,1],
-      backgroundColor: [
-        C.yellow,C.yellow,C.yellow,C.yellow,C.yellow,
-        C.blue,C.blue,C.blue,C.blue,C.blue
-      ],
-      borderRadius: 3
-    }]
-  },
-  options: {
-    indexAxis: 'y', responsive: true, maintainAspectRatio: true,
-    plugins:{legend:{display:false}},
-    scales:{x:{display:false}, y:{ticks:{font:{size:9}}, grid:{display:false}}}
-  }
-});
 
-// ── Polar: Roles ──
-new Chart(document.getElementById('chartRoles'), {
-  type: 'polarArea',
-  data: {
-    labels: ['PM Champion','Focal','Líder Proy.','Esp. Auto.','Value Lead','Data Eng.'],
-    datasets: [{
-      data: [5,4,4,3,4,3],
-      backgroundColor: [
-        'rgba(255,230,0,.8)',
-        'rgba(52,131,250,.75)',
-        'rgba(0,166,80,.75)',
-        'rgba(250,52,52,.7)',
-        'rgba(255,119,51,.75)',
-        'rgba(0,184,212,.75)'
-      ],
-      borderWidth: 2, borderColor: '#fff'
-    }]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: true,
-    plugins:{legend:{position:'right', labels:{font:{size:9},boxWidth:10,padding:8}}}
-  }
-});
 </script>
 </body>
 </html>

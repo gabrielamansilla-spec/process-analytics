@@ -6,119 +6,161 @@
 <title>Way of Work — Process Mining · FPS MercadoLibre</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
 <style>
+/* ── MeLi Design Tokens ── */
+:root {
+  --yellow: #FFE600;
+  --yellow-dark: #F0D800;
+  --blue: #3483FA;
+  --blue-dark: #2968C8;
+  --green: #00A650;
+  --navy: #1A1F36;
+  --navy-mid: #2D3561;
+  --text: #1A1F36;
+  --muted: #666;
+  --light-bg: #F5F5F5;
+  --white: #FFFFFF;
+  --border: #E5E5E5;
+  --r: 10px;
+}
+
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',Arial,sans-serif;background:#f5f5f5;color:#333}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:var(--light-bg);color:var(--text);font-size:14px;line-height:1.5}
 
 /* ── NAV ── */
-.topbar{background:#1a1f36;display:flex;align-items:center;justify-content:space-between;padding:12px 32px}
-.topbar a{color:#a0aec0;font-size:12px;text-decoration:none;display:flex;align-items:center;gap:6px}
-.topbar a:hover{color:#fff}
-.topbar .title{color:#fff;font-size:14px;font-weight:700}
+.topbar{background:var(--navy);display:flex;align-items:center;justify-content:space-between;padding:12px 32px;border-bottom:3px solid var(--yellow)}
+.topbar a{color:#a0aec0;font-size:12px;text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .15s}
+.topbar a:hover{color:var(--yellow)}
+.topbar .title{color:#fff;font-size:14px;font-weight:700;letter-spacing:-.2px}
 
 /* ── HERO ── */
-.hero{background:linear-gradient(135deg,#1a1f36 0%,#2d3561 60%,#1a1f36 100%);color:#fff;padding:56px 40px 48px;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-60px;left:-60px;width:300px;height:300px;border-radius:50%;background:rgba(255,230,0,.06)}
-.hero::after{content:'';position:absolute;bottom:-80px;right:-40px;width:400px;height:400px;border-radius:50%;background:rgba(99,91,255,.08)}
-.hero .meli-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,230,0,.15);border:1px solid rgba(255,230,0,.3);padding:5px 16px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1px;color:#ffe600;margin-bottom:18px;text-transform:uppercase}
-.hero h1{font-size:38px;font-weight:800;letter-spacing:-.5px;margin-bottom:10px}
-.hero h1 span{color:#ffe600}
-.hero .sub{font-size:15px;color:#a0aec0;max-width:600px;margin:0 auto 28px;line-height:1.6}
-.hero .hero-stats{display:flex;gap:32px;justify-content:center;flex-wrap:wrap}
-.hero-stat{text-align:center}
-.hero-stat .val{font-size:34px;font-weight:800;color:#ffe600;display:block}
-.hero-stat .lbl{font-size:11px;color:#a0aec0;text-transform:uppercase;letter-spacing:.5px}
+.hero{background:var(--navy);color:#fff;padding:60px 40px 52px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-80px;left:-80px;width:350px;height:350px;border-radius:50%;background:rgba(255,230,0,.05)}
+.hero::after{content:'';position:absolute;bottom:-100px;right:-60px;width:450px;height:450px;border-radius:50%;background:rgba(52,131,250,.07)}
+.meli-tag{display:inline-flex;align-items:center;gap:8px;background:var(--yellow);color:var(--navy);padding:5px 18px;border-radius:4px;font-size:11px;font-weight:800;letter-spacing:1.5px;margin-bottom:20px;text-transform:uppercase}
+.hero h1{font-size:42px;font-weight:900;letter-spacing:-1px;margin-bottom:12px;line-height:1.1}
+.hero h1 span{color:var(--yellow)}
+.hero .sub{font-size:15px;color:rgba(255,255,255,.7);max-width:620px;margin:0 auto 36px;line-height:1.7}
+.hero-stats{display:flex;gap:40px;justify-content:center;flex-wrap:wrap}
+.hero-stat{text-align:center;padding:0 8px}
+.hero-stat .val{font-size:38px;font-weight:900;color:var(--yellow);display:block;line-height:1}
+.hero-stat .lbl{font-size:11px;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.8px;margin-top:4px}
 
-/* ── SECTIONS ── */
-.section{max-width:1100px;margin:0 auto;padding:48px 24px}
-.section-tag{display:inline-flex;align-items:center;gap:6px;background:#ffe600;color:#1a1f36;padding:3px 12px;border-radius:4px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
-.section-title{font-size:26px;font-weight:800;color:#1a1f36;margin-bottom:6px}
-.section-sub{font-size:14px;color:#718096;margin-bottom:32px;max-width:700px;line-height:1.6}
+/* ── SECTION WRAPPER ── */
+.section{max-width:1140px;margin:0 auto;padding:52px 24px}
+.section-tag{display:inline-flex;align-items:center;gap:6px;background:var(--yellow);color:var(--navy);padding:4px 14px;border-radius:4px;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px}
+.section-title{font-size:28px;font-weight:900;color:var(--navy);margin-bottom:8px;letter-spacing:-.4px}
+.section-sub{font-size:14px;color:var(--muted);margin-bottom:36px;max-width:720px;line-height:1.7}
 
-/* ── OBJETIVO CARDS ── */
-.obj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:40px}
-.obj-card{background:#fff;border-radius:12px;padding:22px 20px;box-shadow:0 2px 8px rgba(0,0,0,.07);border-top:4px solid #ffe600;text-align:center}
-.obj-card .num{font-size:32px;font-weight:900;color:#ffe600;display:block;line-height:1}
-.obj-card .icon{font-size:28px;margin:8px 0}
-.obj-card h4{font-size:13px;font-weight:700;color:#1a1f36;line-height:1.4;margin-bottom:6px}
-.obj-card p{font-size:11px;color:#718096;line-height:1.5}
+/* ── CARD BASE ── */
+.card{background:var(--white);border-radius:var(--r);box-shadow:0 1px 4px rgba(0,0,0,.08),0 4px 16px rgba(0,0,0,.04)}
 
-/* ── CHARTS GRID ── */
+/* ── FEATURE GRID ── */
+.feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:36px}
+.feat-card{background:var(--white);border-radius:var(--r);padding:26px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.feat-card h3{font-size:15px;font-weight:800;color:var(--navy);margin-bottom:16px;display:flex;align-items:center;gap:8px;border-bottom:2px solid var(--yellow);padding-bottom:10px}
+.feat-list{list-style:none}
+.feat-list li{padding:8px 0;border-bottom:1px solid #f5f5f5;font-size:13px;color:#444;display:flex;align-items:flex-start;gap:10px;line-height:1.5}
+.feat-list li::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--yellow);flex-shrink:0;margin-top:5px}
+.feat-list li:last-child{border:none}
+.feat-list li strong{color:var(--navy)}
+
+/* ── CHARTS ── */
 .charts-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:32px}
 .charts-row.three{grid-template-columns:1fr 1fr 1fr}
-.chart-card{background:#fff;border-radius:12px;padding:22px;box-shadow:0 2px 8px rgba(0,0,0,.07)}
-.chart-card h3{font-size:13px;font-weight:700;color:#1a1f36;margin-bottom:4px}
-.chart-card .chart-sub{font-size:11px;color:#a0aec0;margin-bottom:14px}
-.chart-card canvas{max-height:240px}
-
-/* ── METHODOLOGY ── */
-.method-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-bottom:32px;position:relative}
-.method-steps::before{content:'';position:absolute;top:36px;left:12%;right:12%;height:3px;background:linear-gradient(90deg,#ffe600,#635bff);z-index:0}
-.step{text-align:center;position:relative;z-index:1}
-.step .circle{width:72px;height:72px;border-radius:50%;background:#1a1f36;border:4px solid #ffe600;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:22px;font-weight:900;color:#ffe600}
-.step h4{font-size:13px;font-weight:700;color:#1a1f36;margin-bottom:4px}
-.step p{font-size:11px;color:#718096;line-height:1.5;padding:0 8px}
-
-/* ── AUTOMATION JOURNEY ── */
-.auto-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:32px}
-.auto-card{border-radius:12px;padding:24px 20px;position:relative;overflow:hidden}
-.auto-card.lvl1{background:#fff3cd;border:2px solid #ffe600}
-.auto-card.lvl2{background:#e8f0ff;border:2px solid #635bff}
-.auto-card.lvl3{background:#e8fff0;border:2px solid #38a169}
-.auto-card .lvl-badge{display:inline-block;padding:2px 10px;border-radius:10px;font-size:10px;font-weight:800;margin-bottom:10px;text-transform:uppercase}
-.auto-card.lvl1 .lvl-badge{background:#ffe600;color:#1a1f36}
-.auto-card.lvl2 .lvl-badge{background:#635bff;color:#fff}
-.auto-card.lvl3 .lvl-badge{background:#38a169;color:#fff}
-.auto-card h4{font-size:15px;font-weight:700;color:#1a1f36;margin-bottom:8px}
-.auto-card p{font-size:12px;color:#4a5568;line-height:1.6}
-.auto-card .icon{font-size:32px;position:absolute;top:16px;right:16px;opacity:.2}
+.chart-card{background:var(--white);border-radius:var(--r);padding:22px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.chart-card h3{font-size:13px;font-weight:800;color:var(--navy);margin-bottom:3px}
+.chart-card .chart-sub{font-size:11px;color:#999;margin-bottom:16px}
+.chart-card canvas{max-height:230px}
 
 /* ── PROCESS TABLE ── */
-.process-table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.07);margin-bottom:32px}
-.process-table th{background:#1a1f36;color:#ffe600;padding:12px 16px;font-size:11px;text-transform:uppercase;letter-spacing:.5px;text-align:left}
-.process-table td{padding:11px 16px;font-size:13px;border-bottom:1px solid #f0f2f5}
-.process-table tr:hover td{background:#fffde7}
+.process-table{width:100%;border-collapse:collapse;background:var(--white);border-radius:var(--r);overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.08);margin-bottom:36px}
+.process-table th{background:var(--navy);color:var(--yellow);padding:12px 16px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;text-align:left}
+.process-table td{padding:12px 16px;font-size:13px;border-bottom:1px solid #f5f5f5;color:#333}
+.process-table tr:hover td{background:#FFFDE7}
 .process-table tr:last-child td{border:none}
-.proc-badge{display:inline-block;padding:2px 10px;border-radius:8px;font-size:11px;font-weight:700}
+.proc-badge{display:inline-block;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.3px}
+.badge-active{background:#E8F5E9;color:#1B5E20}
+.badge-progress{background:#FFF8E1;color:#E65100}
+.badge-pov{background:#E3F2FD;color:#0D47A1}
 
-/* ── FEATURES GRID ── */
-.feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:32px}
-.feat-card{background:#fff;border-radius:12px;padding:24px;box-shadow:0 2px 8px rgba(0,0,0,.07)}
-.feat-card h3{font-size:15px;font-weight:700;color:#1a1f36;margin-bottom:14px;display:flex;align-items:center;gap:8px}
-.feat-list{list-style:none}
-.feat-list li{padding:7px 0;border-bottom:1px solid #f5f5f5;font-size:13px;color:#4a5568;display:flex;align-items:flex-start;gap:8px}
-.feat-list li::before{content:'✓';color:#38a169;font-weight:700;flex-shrink:0;margin-top:1px}
-.feat-list li:last-child{border:none}
+/* ── AUTOMATION JOURNEY ── */
+.auto-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:36px}
+.auto-card{border-radius:var(--r);padding:26px 22px;position:relative;overflow:hidden;border:2px solid transparent}
+.auto-card.lvl1{background:#FFFDE7;border-color:var(--yellow)}
+.auto-card.lvl2{background:#EEF4FF;border-color:var(--blue)}
+.auto-card.lvl3{background:#E8F5E9;border-color:var(--green)}
+.auto-card .lvl-badge{display:inline-block;padding:3px 12px;border-radius:4px;font-size:10px;font-weight:900;margin-bottom:12px;text-transform:uppercase;letter-spacing:.8px}
+.auto-card.lvl1 .lvl-badge{background:var(--yellow);color:var(--navy)}
+.auto-card.lvl2 .lvl-badge{background:var(--blue);color:#fff}
+.auto-card.lvl3 .lvl-badge{background:var(--green);color:#fff}
+.auto-card h4{font-size:16px;font-weight:800;color:var(--navy);margin-bottom:10px}
+.auto-card p{font-size:13px;color:#555;line-height:1.65}
+.auto-card .icon{font-size:36px;position:absolute;top:18px;right:18px;opacity:.15}
+
+/* ── METHODOLOGY ── */
+.method-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-bottom:36px;position:relative}
+.method-steps::before{content:'';position:absolute;top:35px;left:14%;right:14%;height:3px;background:linear-gradient(90deg,var(--yellow),var(--blue));z-index:0;border-radius:2px}
+.step{text-align:center;position:relative;z-index:1}
+.step .circle{width:70px;height:70px;border-radius:50%;background:var(--navy);border:4px solid var(--yellow);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:20px;font-weight:900;color:var(--yellow)}
+.step h4{font-size:13px;font-weight:800;color:var(--navy);margin-bottom:5px}
+.step p{font-size:12px;color:var(--muted);line-height:1.5;padding:0 8px}
 
 /* ── ROLES ── */
-.roles-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:32px}
-.role-card{background:#fff;border-radius:12px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.07);border-left:4px solid #635bff}
-.role-card h4{font-size:14px;font-weight:700;color:#1a1f36;margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.role-card p{font-size:12px;color:#718096;line-height:1.5}
+.roles-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:36px}
+.role-card{background:var(--white);border-radius:var(--r);padding:20px;box-shadow:0 1px 4px rgba(0,0,0,.08);border-top:4px solid var(--yellow)}
+.role-card.blue{border-top-color:var(--blue)}
+.role-card.green{border-top-color:var(--green)}
+.role-card.red{border-top-color:#FA3434}
+.role-card.orange{border-top-color:#FF7733}
+.role-card.teal{border-top-color:#00B8D4}
+.role-card h4{font-size:14px;font-weight:800;color:var(--navy);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.role-card p{font-size:12px;color:var(--muted);line-height:1.55}
+
+/* ── MANAGEMENT CARDS ── */
+.mgmt-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:36px}
 
 /* ── CONTACT ── */
-.contact-bar{background:#1a1f36;border-radius:12px;padding:28px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:20px}
-.contact-bar h3{font-size:18px;font-weight:700;color:#fff}
-.contact-bar p{font-size:13px;color:#a0aec0;margin-top:4px}
-.contact-btn{background:#ffe600;color:#1a1f36;padding:10px 22px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:800;white-space:nowrap}
-.contact-btn:hover{background:#f0d700}
+.contact-bar{background:var(--navy);border-radius:var(--r);padding:30px 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;margin-bottom:24px}
+.contact-bar h3{font-size:20px;font-weight:800;color:#fff}
+.contact-bar p{font-size:13px;color:rgba(255,255,255,.6);margin-top:5px}
+.contact-btn{background:var(--yellow);color:var(--navy);padding:12px 24px;border-radius:6px;text-decoration:none;font-size:13px;font-weight:900;white-space:nowrap;transition:background .15s}
+.contact-btn:hover{background:var(--yellow-dark)}
 
 /* ── DIVIDER ── */
-.divider{border:none;border-top:2px solid #f0f2f5;margin:8px 0 40px}
+.divider{border:none;border-top:2px solid var(--border);margin:0 0 44px}
+
+/* ── LINKS ROW ── */
+.links-row{display:flex;gap:12px;flex-wrap:wrap}
+.link-btn{display:inline-flex;align-items:center;gap:7px;padding:11px 20px;border-radius:6px;text-decoration:none;font-size:13px;font-weight:800;transition:opacity .15s}
+.link-btn:hover{opacity:.85}
+.link-btn.primary{background:var(--blue);color:#fff}
+.link-btn.secondary{background:var(--navy);color:var(--yellow)}
+.link-btn.outline{background:var(--white);color:var(--blue);border:2px solid var(--blue)}
+.link-btn.outline-dark{background:var(--white);color:var(--navy);border:2px solid var(--border)}
 
 /* ── FOOTER ── */
-footer{text-align:center;padding:24px;font-size:11px;color:#a0aec0;background:#fff;border-top:1px solid #e2e8f0}
+footer{text-align:center;padding:24px;font-size:11px;color:#aaa;background:var(--white);border-top:1px solid var(--border);margin-top:8px}
 
 /* ── LOGIN ── */
-#login-overlay{position:fixed;inset:0;background:#1a1f36;z-index:99999;display:flex;align-items:center;justify-content:center}
-.login-box{background:#fff;border-radius:16px;padding:40px 48px;text-align:center;width:360px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+#login-overlay{position:fixed;inset:0;background:var(--navy);z-index:99999;display:flex;align-items:center;justify-content:center}
+.login-box{background:var(--white);border-radius:16px;padding:40px 48px;text-align:center;width:360px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
 .login-box .logo{font-size:40px;margin-bottom:12px}
-.login-box h2{font-size:20px;font-weight:700;color:#1a1f36;margin-bottom:6px}
+.login-box h2{font-size:20px;font-weight:800;color:var(--navy);margin-bottom:6px}
 .login-box p{font-size:13px;color:#718096;margin-bottom:24px}
-.login-box input{width:100%;padding:12px 16px;border:2px solid #e2e8f0;border-radius:8px;font-size:15px;text-align:center;letter-spacing:4px;outline:none;margin-bottom:14px}
-.login-box input:focus{border-color:#ffe600}
-.login-box button{width:100%;padding:12px;background:#1a1f36;color:#ffe600;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer}
+.login-box input{width:100%;padding:12px 16px;border:2px solid var(--border);border-radius:8px;font-size:15px;text-align:center;letter-spacing:4px;outline:none;margin-bottom:14px;transition:border-color .15s}
+.login-box input:focus{border-color:var(--yellow)}
+.login-box button{width:100%;padding:12px;background:var(--navy);color:var(--yellow);border:none;border-radius:8px;font-size:15px;font-weight:800;cursor:pointer;transition:background .15s}
+.login-box button:hover{background:var(--navy-mid)}
 .login-box .error{color:#e53e3e;font-size:12px;margin-top:8px;display:none}
-.login-box .hint{font-size:11px;color:#a0aec0;margin-top:12px}
+.login-box .hint{font-size:11px;color:#aaa;margin-top:12px}
+
+@media(max-width:900px){
+  .feat-grid,.charts-row,.charts-row.three,.auto-grid,.mgmt-grid{grid-template-columns:1fr}
+  .method-steps{grid-template-columns:1fr 1fr}
+  .method-steps::before{display:none}
+  .hero h1{font-size:30px}
+  .hero-stats{gap:20px}
+}
 </style>
 </head>
 <body>
@@ -144,16 +186,16 @@ function checkPwd(){const v=document.getElementById('pwd-input').value;if(v==='C
 <div class="topbar">
   <a href="index.html">← Volver al Hub</a>
   <span class="title">⚡ Process Mining · Way of Work</span>
-  <span style="font-size:11px;color:#a0aec0">FPS · MercadoLibre · Jul 2024</span>
+  <span style="font-size:11px;color:rgba(255,255,255,.4)">FPS · MercadoLibre · 2026</span>
 </div>
 
 <!-- HERO -->
 <div class="hero">
-  <div class="meli-tag">🟡 FPS · Transformación</div>
+  <div class="meli-tag">FPS · Transformación · MercadoLibre</div>
   <h1>Process <span>Mining</span><br>Way of Work</h1>
-  <p class="sub">Cómo usamos la minería de procesos en MercadoLibre para identificar eficiencias, mejorar operaciones y generar valor con Celonis.</p>
+  <p class="sub">Impulsamos la minería de procesos en MercadoLibre para detectar eficiencias, mejorar operaciones y generar valor con Celonis — desde FPS para toda la organización.</p>
   <div class="hero-stats">
-    <div class="hero-stat"><span class="val">8+</span><span class="lbl">Procesos conectados</span></div>
+    <div class="hero-stat"><span class="val">10+</span><span class="lbl">Procesos conectados</span></div>
     <div class="hero-stat"><span class="val">5</span><span class="lbl">Objetivos estratégicos</span></div>
     <div class="hero-stat"><span class="val">4</span><span class="lbl">Etapas de implementación</span></div>
     <div class="hero-stat"><span class="val">10</span><span class="lbl">Pasos para un Challenge</span></div>
@@ -164,64 +206,29 @@ function checkPwd(){const v=document.getElementById('pwd-input').value;if(v==='C
 <div class="section">
   <span class="section-tag">📖 Introducción</span>
   <h2 class="section-title">¿Qué es Process Mining?</h2>
-  <p class="section-sub">Reconstruimos los procesos de negocio a partir de los registros de eventos que dejamos en SAP, Ariba, Jira, SuccessFactors y otros sistemas — para analizarlos y ejecutar acciones de mejora.</p>
+  <p class="section-sub">Reconstruimos los procesos de negocio a partir de los eventos registrados en SAP, Ariba, Jira, SuccessFactors, Salesforce y otros sistemas — para analizarlos y ejecutar mejoras con datos reales.</p>
 
   <div class="feat-grid">
     <div class="feat-card">
       <h3>🔍 ¿Cómo funciona?</h3>
       <ul class="feat-list">
-        <li>Los sistemas transaccionales (SAP, Ariba, Jira…) registran huellas digitales de cada acción</li>
-        <li>Esas huellas nos permiten mapear automáticamente los procesos y sus variantes</li>
+        <li>Los sistemas transaccionales registran huellas digitales de cada acción en el día a día</li>
+        <li>Esas huellas permiten mapear automáticamente los procesos y sus variantes</li>
         <li>Se identifican: Case ID, descripción de actividad y timestamp</li>
         <li>Celonis reconstruye el proceso "as is" para compararlo con el diseñado</li>
+        <li>Process Mining nos ayuda a entender por qué los procesos no funcionan como esperamos</li>
       </ul>
     </div>
     <div class="feat-card">
       <h3>🎯 ¿Para qué lo usamos en MELI?</h3>
       <ul class="feat-list">
-        <li>Acelerador de mejora continua desde FPS</li>
-        <li>Identificar eficiencias en las operaciones</li>
-        <li>Escalar, sistematizar y homogeneizar procesos</li>
+        <li>Impulsor de mejora continua desde FPS para toda la organización</li>
+        <li>Detectar eficiencias en las operaciones y descubrir oportunidades de mejora</li>
+        <li>Facilitar la escalabilidad, sistematización y homogeneización de procesos</li>
         <li>Optimizar costos, reducir tiempos y eliminar errores</li>
-        <li>Generar visión E2E compartida entre áreas</li>
+        <li>Generar visión E2E compartida entre áreas y países</li>
+        <li>Monitorear la captura de valor alineada a objetivos estratégicos</li>
       </ul>
-    </div>
-  </div>
-
-  <!-- Objetivos -->
-  <span class="section-tag">🎯 Objetivos 2024</span>
-  <h2 class="section-title" style="margin-top:8px">5 Objetivos con Process Mining</h2>
-  <p class="section-sub">Alineados al ADN de MercadoLibre: Grow Fit, Gain Efficiency, tecnología de punta y escalable.</p>
-  <div class="obj-grid">
-    <div class="obj-card">
-      <span class="num">01</span>
-      <div class="icon">👁️</div>
-      <h4>Visibilidad automática de Procesos</h4>
-      <p>Ver cómo funcionan realmente, sin depender de reportes manuales.</p>
-    </div>
-    <div class="obj-card">
-      <span class="num">02</span>
-      <div class="icon">📊</div>
-      <h4>Cultura de Process Analytics</h4>
-      <p>Visión E2E de procesos compartida entre áreas y países.</p>
-    </div>
-    <div class="obj-card">
-      <span class="num">03</span>
-      <div class="icon">💡</div>
-      <h4>Entender el potencial de la solución</h4>
-      <p>Evaluar casos de uso y benchmarks para cada proceso.</p>
-    </div>
-    <div class="obj-card">
-      <span class="num">04</span>
-      <div class="icon">⚙️</div>
-      <h4>Detectar oportunidades de eficientización</h4>
-      <p>Identificar fricciones, retrabajos y cuellos de botella.</p>
-    </div>
-    <div class="obj-card">
-      <span class="num">05</span>
-      <div class="icon">💰</div>
-      <h4>Crear Valor Financiero</h4>
-      <p>Implementar mejoras con captura de valor medible.</p>
     </div>
   </div>
 </div>
@@ -257,14 +264,16 @@ function checkPwd(){const v=document.getElementById('pwd-input').value;if(v==='C
       </tr>
     </thead>
     <tbody>
-      <tr><td><strong>PTP</strong></td><td>Procurement</td><td><span class="proc-badge" style="background:#d4edda;color:#155724">🟢 Activo</span></td><td>Dashboards, Action Flows, Task Inbox</td></tr>
-      <tr><td><strong>PTP</strong></td><td>AP (Accounts Payable)</td><td><span class="proc-badge" style="background:#d4edda;color:#155724">🟢 Activo</span></td><td>Variantes, Cycle Time, Retrabajo</td></tr>
-      <tr><td><strong>ITSM</strong></td><td>IT Service Management</td><td><span class="proc-badge" style="background:#d4edda;color:#155724">🟢 Activo</span></td><td>KPIs, Compliance, Automations</td></tr>
-      <tr><td><strong>RTR</strong></td><td>Record to Report</td><td><span class="proc-badge" style="background:#d4edda;color:#155724">🟢 Activo</span></td><td>Extractos, Expense Management</td></tr>
-      <tr><td><strong>OTC</strong></td><td>Order to Cash</td><td><span class="proc-badge" style="background:#fff3cd;color:#856404">🟡 En curso</span></td><td>Variantes AS IS, Análisis</td></tr>
-      <tr><td><strong>People</strong></td><td>HTR (Hire to Retire)</td><td><span class="proc-badge" style="background:#d4edda;color:#155724">🟢 Activo</span></td><td>Automatizaciones, Reporting</td></tr>
-      <tr><td><strong>Shipping</strong></td><td>Mercado Envíos</td><td><span class="proc-badge" style="background:#fff3cd;color:#856404">🟡 En curso</span></td><td>POV activo</td></tr>
-      <tr><td><strong>Order Mgmt</strong></td><td>Sales / O2C</td><td><span class="proc-badge" style="background:#cce5ff;color:#004085">🔵 POV</span></td><td>Análisis inicial</td></tr>
+      <tr><td><strong>PTP</strong></td><td>Procurement / OC</td><td><span class="proc-badge badge-active">🟢 Activo</span></td><td>Dashboards, Action Flows, Alertas, Task Inbox</td></tr>
+      <tr><td><strong>PTP</strong></td><td>AP (Accounts Payable)</td><td><span class="proc-badge badge-active">🟢 Activo</span></td><td>Variantes, Cycle Time, Retrabajo, Tiempos</td></tr>
+      <tr><td><strong>ITSM</strong></td><td>IT Service Management</td><td><span class="proc-badge badge-active">🟢 Activo</span></td><td>KPIs, Compliance, Automations, Alertas</td></tr>
+      <tr><td><strong>RTR</strong></td><td>Record to Report</td><td><span class="proc-badge badge-active">🟢 Activo</span></td><td>Extractos, Expense Management</td></tr>
+      <tr><td><strong>People</strong></td><td>HTR (Hire to Retire)</td><td><span class="proc-badge badge-active">🟢 Activo</span></td><td>Automatizaciones, Reporting</td></tr>
+      <tr><td><strong>OTC</strong></td><td>Order to Cash</td><td><span class="proc-badge badge-progress">🟡 En curso</span></td><td>Variantes AS IS, Análisis de ciclo</td></tr>
+      <tr><td><strong>Shipping</strong></td><td>Mercado Envíos</td><td><span class="proc-badge badge-progress">🟡 En curso</span></td><td>POV activo, variantes</td></tr>
+      <tr><td><strong>Order Mgmt</strong></td><td>Sales / O2C</td><td><span class="proc-badge badge-pov">🔵 POV</span></td><td>Análisis inicial</td></tr>
+      <tr><td><strong>Finance</strong></td><td>FI / Costos</td><td><span class="proc-badge badge-progress">🟡 En curso</span></td><td>Migración RUN FI costos</td></tr>
+      <tr><td><strong>Grow</strong></td><td>Comercial</td><td><span class="proc-badge badge-pov">🔵 POV</span></td><td>Migración en proceso</td></tr>
     </tbody>
   </table>
 </div>
@@ -275,7 +284,7 @@ function checkPwd(){const v=document.getElementById('pwd-input').value;if(v==='C
 <div class="section">
   <span class="section-tag">🛠 Herramienta</span>
   <h2 class="section-title">Funcionalidades de Celonis</h2>
-  <p class="section-sub">Celonis es la herramienta de Process Mining y mejora continua que elegimos. Tiene dos tipos de funcionalidades: analíticas y de gestión.</p>
+  <p class="section-sub">Celonis es la herramienta de Process Mining y mejora continua que elegimos para reconstruir, analizar y ejecutar acciones sobre los procesos de MELI.</p>
 
   <div class="feat-grid">
     <div class="feat-card">
@@ -285,7 +294,7 @@ function checkPwd(){const v=document.getElementById('pwd-input').value;if(v==='C
         <li>Analizar tiempos de ciclo totales y parciales</li>
         <li>Medir el grado de automatización por actividad</li>
         <li>Detectar retrabajo y cambios en actividades</li>
-        <li>Comparar comportamiento entre países, sociedades y proveedores</li>
+        <li>Comparar comportamiento entre países, sociedades, proveedores, clientes y fulfillments</li>
         <li>Validar el grado de compliance con respecto al proceso deseado</li>
         <li>Diseñar Dashboards con KPIs de procesos</li>
       </ul>
@@ -293,24 +302,25 @@ function checkPwd(){const v=document.getElementById('pwd-input').value;if(v==='C
     <div class="feat-card">
       <h3>⚙️ Funcionalidades de Gestión</h3>
       <ul class="feat-list">
-        <li><strong>Nuevos KPIs</strong>: Dashboards configurables para monitorear procesos</li>
-        <li><strong>Action Flows</strong>: Ejecutar y automatizar acciones directamente desde Celonis</li>
-        <li><strong>Task Inbox</strong>: Priorizar y hacer seguimiento de tareas pendientes</li>
-        <li><strong>Apps Preconfiguradas</strong>: Soluciones listas para PTP, ITSM, RTR y más</li>
+        <li><strong>KPIs configurables:</strong> Dashboards para monitorear procesos en tiempo real</li>
+        <li><strong>Action Flows:</strong> Ejecutar y automatizar acciones directamente desde Celonis</li>
+        <li><strong>Task Inbox:</strong> Priorizar y hacer seguimiento de tareas pendientes</li>
+        <li><strong>Apps Preconfiguradas:</strong> Soluciones listas para PTP, ITSM, RTR y más</li>
+        <li><strong>Alertas inteligentes:</strong> Notificaciones automáticas a usuarios clave</li>
       </ul>
     </div>
   </div>
 
   <!-- Automation Journey -->
   <span class="section-tag">🚀 Automatización</span>
-  <h2 class="section-title" style="margin-top:8px">Automation Journey</h2>
-  <p class="section-sub">Recomendamos implementar Action Flows en forma gradual. Empezamos simple y escalamos hacia automatización sin supervisión.</p>
+  <h2 class="section-title" style="margin-top:10px">Automation Journey</h2>
+  <p class="section-sub">Implementamos Action Flows en forma gradual. Empezamos simple y escalamos hacia automatización sin supervisión.</p>
   <div class="auto-grid">
     <div class="auto-card lvl1">
       <span class="icon">🔔</span>
       <span class="lvl-badge">AF #1 · Empezamos</span>
       <h4>Intelligent Notifications</h4>
-      <p>Notificaciones inteligentes para involucrar a usuarios y que tomen medidas preventivas basadas en datos del sistema.</p>
+      <p>Notificaciones inteligentes que involucran a usuarios para que tomen medidas preventivas basadas en datos del sistema.</p>
     </div>
     <div class="auto-card lvl2">
       <span class="icon">🤝</span>
@@ -335,8 +345,7 @@ function checkPwd(){const v=document.getElementById('pwd-input').value;if(v==='C
   <h2 class="section-title">Cómo Trabajamos</h2>
   <p class="section-sub">Dividimos las implementaciones en 4 etapas que abarcan desde el análisis de la necesidad hasta el seguimiento de la captura de valor.</p>
 
-  <!-- Etapas implementación -->
-  <h3 style="font-size:15px;font-weight:700;margin-bottom:20px;color:#1a1f36">🏗 Implementación de Proyectos</h3>
+  <h3 style="font-size:15px;font-weight:800;margin-bottom:22px;color:var(--navy)">🏗 Implementación de Proyectos</h3>
   <div class="method-steps">
     <div class="step">
       <div class="circle">01</div>
@@ -360,20 +369,17 @@ function checkPwd(){const v=document.getElementById('pwd-input').value;if(v==='C
     </div>
   </div>
 
-  <div class="charts-row three" style="margin-top:32px">
-    <!-- POVs -->
+  <div class="charts-row three" style="margin-top:36px">
     <div class="chart-card">
       <h3>🔬 Metodología POVs</h3>
       <div class="chart-sub">Prueba de Valor — 3 sesiones</div>
       <canvas id="chartPov"></canvas>
     </div>
-    <!-- Challenges -->
     <div class="chart-card">
       <h3>⚡ Metodología Challenges</h3>
       <div class="chart-sub">10 pasos de implementación</div>
       <canvas id="chartChallenge"></canvas>
     </div>
-    <!-- Roles -->
     <div class="chart-card">
       <h3>👥 Roles del Proyecto</h3>
       <div class="chart-sub">Perfiles necesarios</div>
@@ -381,30 +387,29 @@ function checkPwd(){const v=document.getElementById('pwd-input').value;if(v==='C
     </div>
   </div>
 
-  <!-- Roles -->
-  <h3 style="font-size:15px;font-weight:700;margin:32px 0 16px;color:#1a1f36">👥 Perfiles del Equipo</h3>
+  <h3 style="font-size:15px;font-weight:800;margin:36px 0 18px;color:var(--navy)">👥 Perfiles del Equipo</h3>
   <div class="roles-grid">
     <div class="role-card">
       <h4>🎯 Process Mining Champion</h4>
       <p>Lidera la adopción. Entiende PM y Celonis. Puede capacitar a otros focals.</p>
     </div>
-    <div class="role-card" style="border-left-color:#ffe600">
+    <div class="role-card blue">
       <h4>🔍 Focal</h4>
       <p>Conoce el caso de uso. Valida variantes, ineficiencias y oportunidades. Embajador del proyecto.</p>
     </div>
-    <div class="role-card" style="border-left-color:#38a169">
+    <div class="role-card green">
       <h4>📐 Líder de Proyecto</h4>
       <p>Gestiona implementación de casos de uso. Guía a focals en challenges. Alinea mejoras con captura de valor.</p>
     </div>
-    <div class="role-card" style="border-left-color:#e53e3e">
+    <div class="role-card red">
       <h4>🤖 Especialista Automatización</h4>
       <p>Implementa Action Flows y soluciones de automatización basadas en hallazgos de PM.</p>
     </div>
-    <div class="role-card" style="border-left-color:#ed8936">
+    <div class="role-card orange">
       <h4>💼 Value Lead</h4>
       <p>Define métricas objetivo, captura de valor y periodicidad de seguimiento.</p>
     </div>
-    <div class="role-card" style="border-left-color:#9f7aea">
+    <div class="role-card teal">
       <h4>🔧 Data Engineer</h4>
       <p>Conexión de fuentes de datos, carga a Celonis, validación de modelos de datos.</p>
     </div>
@@ -417,9 +422,9 @@ function checkPwd(){const v=document.getElementById('pwd-input').value;if(v==='C
 <div class="section">
   <span class="section-tag">📈 Gestión</span>
   <h2 class="section-title">Informe de Gestión de Requerimientos</h2>
-  <p class="section-sub">Seguimiento del backlog, en curso, tiempos, por proceso y por estado. Fuentes: Jira, Celonis, Looker.</p>
+  <p class="section-sub">Seguimiento del backlog, issues en curso, tiempos, por proceso y por estado. Fuentes: Jira RPRA, Celonis, Looker.</p>
 
-  <div class="feat-grid">
+  <div class="mgmt-grid">
     <div class="feat-card">
       <h3>📋 Seguimiento Interno</h3>
       <ul class="feat-list">
@@ -448,59 +453,74 @@ function checkPwd(){const v=document.getElementById('pwd-input').value;if(v==='C
     <a href="mailto:processmining@mercadolibre.com" class="contact-btn">✉️ processmining@mercadolibre.com</a>
   </div>
 
-  <div style="display:flex;gap:12px;flex-wrap:wrap">
-    <a href="process_analytics_dashboard.html" style="display:inline-flex;align-items:center;gap:6px;background:#635bff;color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:700">📊 Ver Dashboard RPRA</a>
-    <a href="dashboard_alertas.html" style="display:inline-flex;align-items:center;gap:6px;background:#1a1f36;color:#ffe600;padding:10px 18px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:700">🚨 Ver Alertas Celonis</a>
-    <a href="https://mercadolibre-administration.atlassian.net/servicedesk/customer/portal/12" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#fff;color:#635bff;border:2px solid #635bff;padding:10px 18px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:700">🎫 Portal Jira RPRA</a>
-    <a href="https://mercadolibre.us-1.celonis.cloud" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#fff;color:#1a1f36;border:2px solid #e2e8f0;padding:10px 18px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:700">🔗 Abrir Celonis</a>
+  <div class="links-row">
+    <a href="process_analytics_dashboard.html" class="link-btn primary">📊 Dashboard RPRA</a>
+    <a href="dashboard_alertas.html" class="link-btn secondary">🚨 Alertas Celonis</a>
+    <a href="https://mercadolibre-administration.atlassian.net/servicedesk/customer/portal/12" target="_blank" class="link-btn outline">🎫 Portal Jira RPRA</a>
+    <a href="https://mercadolibre.us-1.celonis.cloud" target="_blank" class="link-btn outline-dark">🔗 Abrir Celonis</a>
+    <a href="https://wiki.adminml.com/page/3808793599361729" target="_blank" class="link-btn outline-dark">📚 Wiki Introducción</a>
   </div>
 </div>
 
 <footer>
-  Process Analytics · FPS Transformación · MercadoLibre · Way of Work 2024
+  Process Analytics · FPS Transformación · MercadoLibre · Way of Work 2026
 </footer>
 
 <script>
-// Charts
-const MELI_COLORS = ['#ffe600','#635bff','#38a169','#ed8936','#e53e3e','#9f7aea','#2b6cb0','#00b5d8'];
+// ── MeLi Brand Colors ──
+const C = {
+  yellow: '#FFE600',
+  blue:   '#3483FA',
+  green:  '#00A650',
+  navy:   '#1A1F36',
+  orange: '#FF7733',
+  red:    '#FA3434',
+  teal:   '#00B8D4',
+  light:  '#EEF4FF'
+};
 
-// Procesos bar
+// Shared options
+const baseOpts = {responsive:true, maintainAspectRatio:true, plugins:{legend:{display:false}}};
+
+// ── Bar: Iniciativas por proceso ──
 new Chart(document.getElementById('chartProcesos'), {
   type: 'bar',
   data: {
-    labels: ['PTP','ITSM','RTR','People','OTC','Shipping','Order Mgmt','AP'],
+    labels: ['PTP','ITSM','AP','RTR','People','OTC','Shipping','Finance','Order Mgmt','Grow'],
     datasets: [{
-      label: '# Iniciativas',
-      data: [16, 12, 10, 8, 6, 5, 4, 7],
-      backgroundColor: MELI_COLORS,
-      borderRadius: 5
+      label: 'Iniciativas',
+      data: [18, 14, 12, 10, 9, 7, 6, 5, 4, 3],
+      backgroundColor: [C.yellow,C.blue,C.yellow,C.green,C.blue,C.orange,C.teal,C.navy,C.red,C.green],
+      borderRadius: 5, borderSkipped: false
     }]
   },
   options: {
-    responsive: true, maintainAspectRatio: true,
-    plugins: {legend:{display:false}},
-    scales: {y:{beginAtZero:true, ticks:{font:{size:10}}}, x:{ticks:{font:{size:10}}}}
+    ...baseOpts,
+    scales: {
+      y:{beginAtZero:true, ticks:{font:{size:10}}, grid:{color:'#f0f0f0'}},
+      x:{ticks:{font:{size:10}}, grid:{display:false}}
+    }
   }
 });
 
-// Tipos donut
+// ── Donut: Tipos de iniciativas ──
 new Chart(document.getElementById('chartTipos'), {
   type: 'doughnut',
   data: {
     labels: ['Proyectos','Challenges','POVs'],
     datasets: [{
-      data: [18, 42, 8],
-      backgroundColor: ['#1a1f36','#ffe600','#635bff'],
+      data: [20, 42, 8],
+      backgroundColor: [C.navy, C.yellow, C.blue],
       borderWidth: 3, borderColor: '#fff'
     }]
   },
   options: {
     responsive: true, maintainAspectRatio: true,
-    plugins: {legend:{position:'right', labels:{font:{size:11},boxWidth:12}}}
+    plugins:{legend:{position:'right', labels:{font:{size:11},boxWidth:13,padding:12}}}
   }
 });
 
-// POV radar
+// ── Radar: POV ──
 new Chart(document.getElementById('chartPov'), {
   type: 'radar',
   data: {
@@ -509,50 +529,61 @@ new Chart(document.getElementById('chartPov'), {
       label: 'Cobertura POV',
       data: [90,80,100,85,75,95],
       backgroundColor: 'rgba(255,230,0,.2)',
-      borderColor: '#ffe600',
-      borderWidth: 2,
-      pointBackgroundColor: '#1a1f36'
+      borderColor: C.yellow,
+      borderWidth: 2.5,
+      pointBackgroundColor: C.navy,
+      pointRadius: 4
     }]
   },
   options: {
     responsive: true, maintainAspectRatio: true,
-    scales: {r:{ticks:{display:false}, grid:{color:'#e2e8f0'}}},
-    plugins: {legend:{display:false}}
+    scales:{r:{ticks:{display:false}, grid:{color:'#e8e8e8'}, pointLabels:{font:{size:9}}}},
+    plugins:{legend:{display:false}}
   }
 });
 
-// Challenge horizontal bar
+// ── Horizontal bar: Challenge steps ──
 new Chart(document.getElementById('chartChallenge'), {
   type: 'bar',
   data: {
     labels: ['01 Relevamiento','02 Formalización','03 Esp. Funcional','04 Métrica Objetivo','05 Viabilidad','06 Validación','07 Testing','08 Cap. de Valor','09 Go Live','10 Resultados'],
     datasets: [{
       data: [1,1,1,1,1,1,1,1,1,1],
-      backgroundColor: ['#ffe600','#f0d700','#e6c800','#dbb900','#d1aa00','#c79b00','#bd8c00','#b37d00','#a96e00','#635bff'],
+      backgroundColor: [
+        C.yellow,C.yellow,C.yellow,C.yellow,C.yellow,
+        C.blue,C.blue,C.blue,C.blue,C.blue
+      ],
       borderRadius: 3
     }]
   },
   options: {
     indexAxis: 'y', responsive: true, maintainAspectRatio: true,
-    plugins: {legend:{display:false}},
-    scales: {x:{display:false}, y:{ticks:{font:{size:9}}}}
+    plugins:{legend:{display:false}},
+    scales:{x:{display:false}, y:{ticks:{font:{size:9}}, grid:{display:false}}}
   }
 });
 
-// Roles polar
+// ── Polar: Roles ──
 new Chart(document.getElementById('chartRoles'), {
   type: 'polarArea',
   data: {
     labels: ['PM Champion','Focal','Líder Proy.','Esp. Auto.','Value Lead','Data Eng.'],
     datasets: [{
       data: [5,4,4,3,4,3],
-      backgroundColor: ['rgba(255,230,0,.7)','rgba(99,91,255,.7)','rgba(56,161,105,.7)','rgba(229,62,62,.7)','rgba(237,137,54,.7)','rgba(159,122,234,.7)'],
+      backgroundColor: [
+        'rgba(255,230,0,.8)',
+        'rgba(52,131,250,.75)',
+        'rgba(0,166,80,.75)',
+        'rgba(250,52,52,.7)',
+        'rgba(255,119,51,.75)',
+        'rgba(0,184,212,.75)'
+      ],
       borderWidth: 2, borderColor: '#fff'
     }]
   },
   options: {
     responsive: true, maintainAspectRatio: true,
-    plugins: {legend:{position:'right', labels:{font:{size:9},boxWidth:10}}}
+    plugins:{legend:{position:'right', labels:{font:{size:9},boxWidth:10,padding:8}}}
   }
 });
 </script>
